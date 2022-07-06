@@ -1,19 +1,23 @@
 using KrasnodarAirport.Data;
 using KrasnodarAirport.Entities.Identity;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string dbConnectionString = builder.Configuration["Data:ConnectionString"];
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddCloudscribePagination();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddEntityFrameworkSqlite()
-    .AddDbContext<AppDbContext>()
-    .AddIdentity<User, Role>()
-    .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(dbConnectionString));
+
+builder.Services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.AccessDeniedPath = "/Home/AccessDenied";
