@@ -2,10 +2,11 @@
 {
     public class Flight : BaseEntity
     {
-        public DateTime DepartureTime { get; set; }
         public string Direction { get; set; } = null!;
-        public DateTime FlightTime { get; set; }
-        public string FlightNumber { get; set; } = null!;
-        public ICollection<Ticket>? Tickets { get; set; }
+        public DateTime PublishDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public int Period { get; set; }
+        public DateTime FirstFlight { get; set; }
+        public ICollection<FlightReal>? FlightReals { get; set; }
     }
 }
