@@ -2,9 +2,8 @@
 
 namespace KrasnodarAirport.Controllers
 {
-    public class FlightController : Controller
+    public class ProfileController : Controller
     {
-        [HttpGet]
         public IActionResult Index()
         {
             return View();

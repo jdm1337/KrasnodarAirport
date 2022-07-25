@@ -33,9 +33,19 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="info">
-                  <a href="/profile/@User?.Claims?.FirstOrDefault(x=>x.Type == "id")" class="d-block">@User?.Claims?.Where(x => x.Type == ClaimsIdentity.DefaultNameClaimType).FirstOrDefault()?.Value </a>
-                </div>
+                @{
+                if(User?.Identity?.IsAuthenticated?? true ){
+                    <div class="info">
+                        <a href="/profile/@User?.Claims?.FirstOrDefault(x=>x.Type == "id")" class="d-block">@User?.Claims?.Where(x => x.Type == ClaimsIdentity.DefaultNameClaimType).FirstOrDefault()?.Value </a>
+                    </div>
+                }
+                else{
+                    <form action="/account/login">
+                        <button type="submit" class="btn btn-light" style="margin-left: 20px">Войти</button>
+                    </form>
+                    
+                }
+                }
               </div>
               <!-- Sidebar Menu -->
               <nav class="mt-2">
@@ -51,8 +61,8 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="~/flight/" class="nav-link">
-                      <i class="nav-icon fas fa-solid fa-users"></i>
+                    <a href="~/ticket/" class="nav-link">
+                      <i class="fa-solid fa-brackets-square"></i>
                       <p>
                           Купить билет
                       </p>
