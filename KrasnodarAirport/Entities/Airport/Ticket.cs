@@ -6,7 +6,6 @@ namespace KrasnodarAirport.Entities.Airport
     {
         public FlightReal? FlightReal { get; set; }
         public User? User { get; set; }
-        public TicketStatus Status { get; set; }
         public string Seat { get; set; } = null!;
         
     }
