@@ -14,7 +14,7 @@ namespace KrasnodarAirport.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly string CommonRoleName = "customer";
+        private readonly string CommonRoleName = "CommonUser";
         
         public AccountController(UserManager<User> userManager)
         {
@@ -45,6 +45,7 @@ namespace KrasnodarAirport.Controllers
             var newUser = new User
             {
                 Email = model.Email,
+                UserName = model.Email,
                 EmailConfirmed = true, //TODO: build fuctionallity to send email
             };
 

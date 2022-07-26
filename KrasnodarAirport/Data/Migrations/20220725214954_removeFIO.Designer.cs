@@ -4,6 +4,7 @@ using KrasnodarAirport.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KrasnodarAirport.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220725214954_removeFIO")]
+    partial class removeFIO
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,26 +23,6 @@ namespace KrasnodarAirport.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("KrasnodarAirport.Entities.Airport.Airplane", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SeatsAmount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Airplane");
-                });
 
             modelBuilder.Entity("KrasnodarAirport.Entities.Airport.Airport", b =>
                 {
@@ -67,9 +49,6 @@ namespace KrasnodarAirport.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AirplaneId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("AirportId")
                         .HasColumnType("int");
 
@@ -94,8 +73,6 @@ namespace KrasnodarAirport.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AirplaneId");
 
                     b.HasIndex("AirportId");
 
@@ -364,15 +341,9 @@ namespace KrasnodarAirport.Data.Migrations
 
             modelBuilder.Entity("KrasnodarAirport.Entities.Airport.Flight", b =>
                 {
-                    b.HasOne("KrasnodarAirport.Entities.Airport.Airplane", "Airplane")
-                        .WithMany()
-                        .HasForeignKey("AirplaneId");
-
                     b.HasOne("KrasnodarAirport.Entities.Airport.Airport", "Airport")
                         .WithMany("Flights")
                         .HasForeignKey("AirportId");
-
-                    b.Navigation("Airplane");
 
                     b.Navigation("Airport");
                 });

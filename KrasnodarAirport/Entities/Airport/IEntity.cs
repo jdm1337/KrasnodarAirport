@@ -2,5 +2,6 @@
 {
     public class IEntity
     {
+        public int Id;
     }
 }

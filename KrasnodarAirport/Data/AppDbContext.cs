@@ -9,6 +9,11 @@ namespace KrasnodarAirport.Data
     {
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
+        public virtual DbSet<Flight> Flights { get; set; }
+
+        public virtual DbSet<Airplane> Airplanes { get; set; }
+        public virtual DbSet<Airport> Airports { get; set; }
+
         public virtual DbSet<FlightReal> FlightsReal { get; set; }
         
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
